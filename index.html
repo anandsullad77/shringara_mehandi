@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shringara Mehandi — Bridal & Festive Henna Art</title>
+  <meta name="description" content="Shringara Mehandi — intricate bridal, festive and Arabic henna artistry. Book your appointment for weddings, festivals and special occasions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== Shringara Mehandi — Landing Page Styles ===== */
+    :root {
+      --henna: #7b4b2a;
+      --henna-dark: #4e2d16;
+      --henna-light: #c98a5e;
+      --cream: #fdf6ee;
+      --cream-2: #f6e9da;
+      --gold: #c89b5c;
+      --ink: #3a2a1d;
+      --muted: #8a7461;
+      --radius: 18px;
+      --shadow: 0 18px 40px -22px rgba(78, 45, 22, 0.45);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .container { width: min(1120px, 90%); margin: 0 auto; }
+
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; line-height: 1.15; }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== Buttons ===== */
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 1.7rem;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .btn--primary {
+      background: linear-gradient(135deg, var(--henna), var(--henna-dark));
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .btn--primary:hover { transform: translateY(-3px); box-shadow: 0 22px 45px -20px rgba(78,45,22,0.6); }
+    .btn--ghost { border-color: var(--henna); color: var(--henna); background: transparent; }
+    .btn--ghost:hover { background: var(--henna); color: #fff; }
+    .btn--block { width: 100%; text-align: center; }
+
+    /* ===== Navbar ===== */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(253, 246, 238, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--cream-2);
+    }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; }
+    .brand { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--henna-dark); }
+    .brand__mark { color: var(--gold); }
+    .brand em { font-style: italic; color: var(--henna); }
+    .nav__links { display: flex; align-items: center; gap: 1.8rem; }
+    .nav__links a { font-size: 0.95rem; color: var(--ink); transition: color 0.2s; }
+    .nav__links a:hover { color: var(--henna); }
+    .nav__cta {
+      background: var(--henna); color: #fff !important; padding: 0.55rem 1.25rem; border-radius: 999px;
+    }
+    .nav__cta:hover { background: var(--henna-dark); }
+    .nav__toggle {
+      display: none; font-size: 1.5rem; line-height: 1;
+      width: 44px; height: 44px; background: none; border: none;
+      color: var(--henna-dark); cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 6rem 0 5rem;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(200,155,92,0.18), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(123,75,42,0.16), transparent 45%),
+        linear-gradient(180deg, var(--cream), var(--cream-2));
+      overflow: hidden;
+    }
+    .hero__decor { position: absolute; font-size: 9rem; color: rgba(123,75,42,0.08); }
+    .hero__decor--left { top: 8%; left: -1rem; }
+    .hero__decor--right { bottom: 4%; right: -1rem; }
+    .hero__eyebrow {
+      display: inline-block; letter-spacing: 0.25em; text-transform: uppercase;
+      font-size: 0.78rem; color: var(--henna); font-weight: 500; margin-bottom: 1.2rem;
+    }
+    .hero__title { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 700; color: var(--henna-dark); }
+    .hero__sub { max-width: 640px; margin: 1.4rem auto 2rem; color: var(--muted); font-size: 1.05rem; }
+    .hero__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero__stats { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; margin-top: 3.5rem; }
+    .hero__stats div { display: flex; flex-direction: column; }
+    .hero__stats strong { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--henna); }
+    .hero__stats span { font-size: 0.85rem; color: var(--muted); }
+
+    /* ===== Sections ===== */
+    .section { padding: 5rem 0; }
+    .section--alt { background: var(--cream-2); }
+    .section__eyebrow {
+      text-align: center; letter-spacing: 0.22em; text-transform: uppercase;
+      font-size: 0.75rem; color: var(--gold); font-weight: 600; margin-bottom: 0.6rem;
+    }
+    .section__title { text-align: center; font-size: clamp(2rem, 4vw, 2.8rem); color: var(--henna-dark); margin-bottom: 3rem; }
+
+    /* ===== Cards ===== */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; }
+    .card {
+      background: #fff; border-radius: var(--radius); padding: 2rem 1.6rem;
+      box-shadow: var(--shadow); border: 1px solid var(--cream-2);
+      transition: transform 0.25s ease;
+    }
+    .card:hover { transform: translateY(-6px); }
+    .card__icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+    .card h3 { font-size: 1.5rem; color: var(--henna); margin-bottom: 0.5rem; }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+
+    /* ===== Gallery ===== */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .gallery__item {
+      position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius);
+      background: linear-gradient(160deg, var(--c1), var(--c2));
+      display: flex; align-items: flex-end; padding: 1rem; overflow: hidden;
+      box-shadow: var(--shadow); cursor: pointer;
+    }
+    .gallery__item::before {
+      content: "❁"; position: absolute; inset: 0; display: grid; place-items: center;
+      font-size: 5rem; color: rgba(255,255,255,0.18);
+    }
+    .gallery__item img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; transition: transform 0.4s ease;
+    }
+    .gallery__item:hover img { transform: scale(1.06); }
+    .gallery__item span {
+      position: relative; color: #fff; font-weight: 500; letter-spacing: 0.05em;
+      background: rgba(0,0,0,0.28); padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.85rem;
+    }
+    .gallery__cta { text-align: center; margin-top: 2.5rem; }
+    .ig-link { display: inline-flex; align-items: center; gap: 0.5rem; }
+
+    /* ===== About ===== */
+    .about__inner { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3rem; align-items: center; }
+    .about__art { display: grid; place-items: center; }
+    .about__circle {
+      width: 260px; height: 260px; border-radius: 50%;
+      background: radial-gradient(circle, var(--henna-light), var(--henna));
+      display: grid; place-items: center; color: #fff; font-size: 3rem;
+      font-family: 'Cormorant Garamond', serif;
+      box-shadow: 0 0 0 14px rgba(200,155,92,0.18), var(--shadow);
+    }
+    .about__text p { color: var(--muted); margin-bottom: 1rem; }
+    .about__text .section__title { text-align: left; margin-bottom: 1.2rem; }
+    .about__text .section__eyebrow { text-align: left; }
+    .about__list { list-style: none; margin-top: 1rem; }
+    .about__list li { padding-left: 1.6rem; position: relative; margin-bottom: 0.5rem; color: var(--ink); }
+    .about__list li::before { content: "✦"; position: absolute; left: 0; color: var(--gold); }
+
+    /* ===== Quotes ===== */
+    .quote {
+      background: #fff; border-radius: var(--radius); padding: 1.8rem;
+      box-shadow: var(--shadow); border-left: 4px solid var(--gold);
+    }
+    .quote p { color: var(--ink); font-style: italic; margin-bottom: 1rem; }
+    .quote footer { color: var(--henna); font-weight: 500; font-size: 0.9rem; }
+
+    /* ===== Contact ===== */
+    .contact__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .contact__info .section__title, .contact__info .section__eyebrow { text-align: left; }
+    .contact__info .section__title { margin-bottom: 1rem; }
+    .contact__info > p { color: var(--muted); margin-bottom: 1.5rem; }
+    .contact__details { list-style: none; }
+    .contact__details li { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.8rem; color: var(--ink); }
+    .contact__form {
+      background: #fff; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow);
+      border: 1px solid var(--cream-2);
+    }
+    .field { margin-bottom: 1.1rem; }
+    .field label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.35rem; color: var(--henna-dark); }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 0.75rem 0.9rem; border: 1.5px solid var(--cream-2);
+      border-radius: 12px; font-family: inherit; font-size: 0.95rem; background: var(--cream);
+      transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--henna-light); }
+    .form__note { text-align: center; color: var(--henna); margin-top: 1rem; font-weight: 500; }
+
+    /* ===== Footer ===== */
+    .footer { background: var(--henna-dark); color: var(--cream); padding: 2.5rem 0; }
+    .footer__inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .brand--footer { color: var(--cream); }
+    .brand--footer em { color: var(--henna-light); }
+    .footer p { font-size: 0.85rem; opacity: 0.8; }
+    .footer__social { display: flex; gap: 1.2rem; }
+    .footer__social a { font-size: 0.85rem; opacity: 0.85; transition: opacity 0.2s; }
+    .footer__social a:hover { opacity: 1; color: var(--gold); }
+
+    /* ===== Responsive ===== */
+
+    /* Tablet & below */
+    @media (max-width: 900px) {
+      .about__inner, .contact__inner { grid-template-columns: 1fr; gap: 2.4rem; }
+      .about__art { order: -1; }
+      .contact__form { order: 2; }
+
+      .nav__links {
+        position: absolute; top: calc(100% + 0.4rem); right: 5%; left: 5%;
+        flex-direction: column; align-items: stretch; gap: 0.25rem;
+        background: var(--cream); padding: 0.8rem; border-radius: var(--radius);
+        box-shadow: var(--shadow); border: 1px solid var(--cream-2);
+        opacity: 0; visibility: hidden; transform: translateY(-8px);
+        transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+      }
+      .nav__links.open { opacity: 1; visibility: visible; transform: translateY(0); }
+      .nav__links a { padding: 0.75rem 0.9rem; border-radius: 12px; }
+      .nav__links a:hover, .nav__links a:active { background: var(--cream-2); }
+      .nav__cta { text-align: center; margin-top: 0.25rem; }
+      .nav__toggle { display: block; }
+    }
+
+    /* Large phones */
+    @media (max-width: 640px) {
+      .container { width: 92%; }
+      .section { padding: 3.5rem 0; }
+      .section__title { margin-bottom: 2rem; }
+
+      .hero { padding: 4rem 0 3.5rem; }
+      .hero__decor { font-size: 6rem; }
+      .hero__sub { font-size: 1rem; }
+      .hero__actions { flex-direction: column; align-items: stretch; }
+      .hero__actions .btn { width: 100%; text-align: center; }
+
+      .hero__stats {
+        gap: 0; margin-top: 2.5rem;
+        background: #fff; border-radius: var(--radius);
+        box-shadow: var(--shadow); padding: 1.2rem 0;
+      }
+      .hero__stats div { flex: 1; padding: 0 0.5rem; }
+      .hero__stats div + div { border-left: 1px solid var(--cream-2); }
+      .hero__stats strong { font-size: 1.6rem; }
+      .hero__stats span { font-size: 0.72rem; }
+
+      .card { padding: 1.6rem 1.4rem; }
+      .about__circle { width: 200px; height: 200px; font-size: 2.4rem; }
+      .contact__form { padding: 1.5rem; }
+
+      .footer__inner { flex-direction: column; text-align: center; }
+    }
+
+    /* Small phones */
+    @media (max-width: 380px) {
+      .brand { font-size: 1.3rem; }
+      .hero__title { font-size: 2.1rem; }
+      .hero__stats { flex-direction: column; gap: 0; }
+      .hero__stats div { padding: 0.7rem 0; }
+      .hero__stats div + div { border-left: none; border-top: 1px solid var(--cream-2); }
+    }
+
+    /* Better tap feedback on touch devices */
+    @media (hover: none) {
+      .btn:active { transform: scale(0.97); }
+      .card:active { transform: translateY(-3px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a href="#top" class="brand">
+        <span class="brand__mark">✦</span>
+        <span class="brand__text">Shringara<em>Mehandi</em></span>
+      </a>
+      <nav class="nav__links" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact" class="nav__cta">Book Now</a>
+      </nav>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__decor hero__decor--left">❀</div>
+    <div class="hero__decor hero__decor--right">❀</div>
+    <div class="container hero__inner">
+      <p class="hero__eyebrow">Bridal · Festive · Arabic Henna</p>
+      <h1 class="hero__title">Artistry that adorns<br />your every celebration</h1>
+      <p class="hero__sub">Intricate, handcrafted mehandi designs for brides, festivals and special moments — drawn with patience, tradition and a modern touch.</p>
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--primary">Book an Appointment</a>
+        <a href="#gallery" class="btn btn--ghost">View Gallery</a>
+      </div>
+      <div class="hero__stats">
+        <div><strong>10+</strong><span>Years Experience</span></div>
+        <div><strong>2000+</strong><span>Happy Brides</span></div>
+        <div><strong>100%</strong><span>Natural Henna</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <p class="section__eyebrow">What We Offer</p>
+      <h2 class="section__title">Our Mehandi Services</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="card__icon">👰</div>
+          <h3>Bridal Mehandi</h3>
+          <p>Elaborate full-hand and feet designs crafted for your wedding day, personalised with hidden initials and motifs.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">🌙</div>
+          <h3>Arabic Mehandi</h3>
+          <p>Bold, flowing floral patterns with generous negative space — elegant and quick to apply for any occasion.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">🎉</div>
+          <h3>Festive & Party</h3>
+          <p>Beautiful designs for Karwa Chauth, Eid, Diwali, Teej and family functions, big or small.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">✨</div>
+          <h3>Customised Designs</h3>
+          <p>Indo-western, minimal, glitter and stone-work mehandi tailored exactly to your theme and outfit.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section section--alt" id="gallery">
+    <div class="container">
+      <p class="section__eyebrow">Our Work</p>
+      <h2 class="section__title">Design Gallery</h2>
+      <div class="gallery">
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#7b4b2a;--c2:#c98a5e;"><img src="images/1.jpg" alt="Bridal mehandi design" loading="lazy" onerror="this.remove()" /><span>Bridal</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#8a5a2b;--c2:#d8a06a;"><img src="images/2.jpg" alt="Arabic mehandi design" loading="lazy" onerror="this.remove()" /><span>Arabic</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#6e3f22;--c2:#b8794a;"><img src="images/3.jpg" alt="Floral mehandi design" loading="lazy" onerror="this.remove()" /><span>Floral</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#94632f;--c2:#e0ad74;"><img src="images/4.jpg" alt="Minimal mehandi design" loading="lazy" onerror="this.remove()" /><span>Minimal</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#5e3618;--c2:#a86d3e;"><img src="images/5.jpg" alt="Mehandi design on feet" loading="lazy" onerror="this.remove()" /><span>Feet</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#7b4b2a;--c2:#cf9560;"><img src="images/6.jpg" alt="Festive mehandi design" loading="lazy" onerror="this.remove()" /><span>Festive</span></a>
+      </div>
+      <div class="gallery__cta">
+        <a href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" class="btn btn--primary ig-link">
+          <span>📷</span> View Full Gallery on Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <div class="container about__inner">
+      <div class="about__art" aria-hidden="true">
+        <div class="about__circle">हिना</div>
+      </div>
+      <div class="about__text">
+        <p class="section__eyebrow">About Us</p>
+        <h2 class="section__title">The story behind every motif</h2>
+        <p>At <strong>Shringara Mehandi</strong>, henna is more than decoration — it's a ritual of joy. For over a decade we have adorned brides and families with designs that carry meaning, blessing and beauty.</p>
+        <p>We use only <strong>100% natural, chemical-free henna</strong> prepared in-house for a deep, long-lasting stain that's gentle on your skin.</p>
+        <ul class="about__list">
+          <li>Organic, hand-rolled henna cones</li>
+          <li>Hygienic, on-time service at your venue</li>
+          <li>Designs personalised to your story</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section section--alt" id="testimonials">
+    <div class="container">
+      <p class="section__eyebrow">Kind Words</p>
+      <h2 class="section__title">What Our Brides Say</h2>
+      <div class="cards">
+        <blockquote class="quote">
+          <p>"The most stunning bridal mehandi I could have asked for. The detail and the deep colour lasted for weeks!"</p>
+          <footer>— Priya S., Bride</footer>
+        </blockquote>
+        <blockquote class="quote">
+          <p>"So patient and professional. Did mehandi for our entire family at the function — everyone loved it."</p>
+          <footer>— Anjali M.</footer>
+        </blockquote>
+        <blockquote class="quote">
+          <p>"Beautiful Arabic design done so quickly. Booking was easy and she arrived right on time."</p>
+          <footer>— Fatima R.</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / BOOKING -->
+  <section class="section contact" id="contact">
+    <div class="container contact__inner">
+      <div class="contact__info">
+        <p class="section__eyebrow">Get In Touch</p>
+        <h2 class="section__title">Book your appointment</h2>
+        <p>Reserve your date for weddings, festivals or events. We'll confirm availability and share design options.</p>
+        <ul class="contact__details">
+          <li><span>📞</span> <a href="tel:+918618357437" style="color:var(--ink);">+91 86183 57437</a></li>
+          <li><span>✉️</span> <a href="mailto:sanjkaremani01@gmail.com" style="color:var(--ink);">sanjkaremani01@gmail.com</a></li>
+          <li><span>📍</span> Serving across the city &amp; nearby</li>
+          <li><span>🕘</span> Open daily · 9 AM – 8 PM</li>
+          <li><span>📷</span> <a href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="color:var(--henna);font-weight:500;">@shringar_mehendi</a></li>
+        </ul>
+      </div>
+      <form class="contact__form" id="bookingForm" action="https://formsubmit.co/sanjkaremani01@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New Mehandi Booking Request" />
+        <input type="hidden" name="_cc" value="anandsullad777@gmail.com" />
+        <input type="hidden" name="_next" id="redirectUrl" value="" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required />
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" placeholder="Your phone number" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="your@email.com (optional)" />
+        </div>
+        <div class="field">
+          <label for="occasion">Occasion</label>
+          <select id="occasion" name="occasion">
+            <option>Bridal</option>
+            <option>Arabic</option>
+            <option>Festive / Party</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="3" placeholder="Date, location, design ideas..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block">Request Booking</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span class="brand brand--footer"><span class="brand__mark">✦</span> Shringara<em>Mehandi</em></span>
+      <p>© 2026 Shringara Mehandi. Crafted with love &amp; henna.</p>
+      <div class="footer__social">
+        <a href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+        <a href="https://wa.me/918618357437" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Shringara Mehandi — interactions =====
+
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    function setMenu(open) {
+      navLinks.classList.toggle('open', open);
+      navToggle.textContent = open ? '✕' : '☰';
+      navToggle.setAttribute('aria-expanded', String(open));
+    }
+
+    navToggle.addEventListener('click', () => {
+      setMenu(!navLinks.classList.contains('open'));
+    });
+
+    // Close mobile menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenu(false));
+    });
+
+    // Close menu on resize up to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) setMenu(false);
+    });
+
+    // Booking form (FormSubmit)
+    const form = document.getElementById('bookingForm');
+
+    // Redirect to the thank-you page after a successful submission
+    const redirectField = document.getElementById('redirectUrl');
+    if (redirectField) {
+      redirectField.value = window.location.href.replace(/index\.html.*$/, '') + 'thank-you.html';
+    }
+
+    // Disable the button while sending
+    form.addEventListener('submit', () => {
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+      }
+    });
+  </script>
+</body>
+</html>
