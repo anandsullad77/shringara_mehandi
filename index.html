@@ -271,6 +271,15 @@
       .nav__links a:hover, .nav__links a:active { background: var(--cream-2); }
       .nav__cta { text-align: center; margin-top: 0.25rem; }
       .nav__toggle { display: block; }
+
+      /* show the sticky bottom action bar + leave room for it */
+      .mobilebar {
+        display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+        background: #fff; border-top: 1px solid var(--cream-2);
+        box-shadow: 0 -6px 24px -12px rgba(78,45,22,0.35);
+        padding-bottom: env(safe-area-inset-bottom, 0);
+      }
+      .footer { padding-bottom: 6rem; }
     }
 
     /* Large phones */
@@ -295,11 +304,10 @@
       .hero__stats strong { font-size: 1.6rem; }
       .hero__stats span { font-size: 0.72rem; }
 
-      /* one service card per row reads better on small screens */
-      .cards { grid-template-columns: 1fr; gap: 1rem; }
-      .card { padding: 1.5rem 1.4rem; display: flex; align-items: flex-start; gap: 1rem; text-align: left; }
-      .card__icon { margin-bottom: 0; font-size: 1.9rem; flex-shrink: 0; }
-      .card h3 { font-size: 1.35rem; }
+      /* service cards: stacked & centered (original look) */
+      .cards { grid-template-columns: 1fr; gap: 1.2rem; }
+      .card { padding: 1.8rem 1.5rem; text-align: center; }
+      .card__icon { margin-bottom: 0.6rem; }
 
       /* tidy 2-up gallery with even gaps */
       .gallery { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
@@ -316,17 +324,6 @@
       .field label { font-size: 0.9rem; }
 
       .footer__inner { flex-direction: column; text-align: center; }
-      /* leave room for the sticky action bar */
-      .footer { padding-bottom: 6rem; }
-      body { padding-bottom: 0; }
-
-      /* show the sticky action bar */
-      .mobilebar {
-        display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
-        background: #fff; border-top: 1px solid var(--cream-2);
-        box-shadow: 0 -6px 24px -12px rgba(78,45,22,0.35);
-        padding-bottom: env(safe-area-inset-bottom, 0);
-      }
     }
 
     /* Small phones */
