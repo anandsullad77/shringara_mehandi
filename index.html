@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- mark JS available before paint so scroll-reveal hides cleanly (no flash) -->
+  <script>document.documentElement.classList.add('js');</script>
   <style>
     /* ===== Shringara Mehandi — Landing Page Styles ===== */
     :root {
@@ -25,7 +27,7 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
     body {
       font-family: 'Poppins', sans-serif;
@@ -76,7 +78,8 @@
     .brand em { font-style: italic; color: var(--henna); }
     .nav__links { display: flex; align-items: center; gap: 1.8rem; }
     .nav__links a { font-size: 0.95rem; color: var(--ink); transition: color 0.2s; }
-    .nav__links a:hover { color: var(--henna); }
+    .nav__links a:hover, .nav__links a.active { color: var(--henna); }
+    .nav__links a.nav__cta.active { color: #fff !important; }
     .nav__cta {
       background: var(--henna); color: #fff !important; padding: 0.55rem 1.25rem; border-radius: 999px;
     }
@@ -215,6 +218,38 @@
     .footer__social a { font-size: 0.85rem; opacity: 0.85; transition: opacity 0.2s; }
     .footer__social a:hover { opacity: 1; color: var(--gold); }
 
+    /* ===== Scroll reveal (only when JS is on, so no-JS users see everything) ===== */
+    html.js .card,
+    html.js .gallery__item,
+    html.js .quote,
+    html.js .section__eyebrow,
+    html.js .section__title,
+    html.js .about__art,
+    html.js .contact__form {
+      opacity: 0; transform: translateY(26px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    html.js .show { opacity: 1 !important; transform: none !important; }
+    @media (prefers-reduced-motion: reduce) {
+      html.js .card, html.js .gallery__item, html.js .quote,
+      html.js .section__eyebrow, html.js .section__title,
+      html.js .about__art, html.js .contact__form {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
+
+    /* ===== Mobile sticky action bar ===== */
+    .mobilebar { display: none; }
+    .mobilebar__btn {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 2px; padding: 0.55rem 0.25rem; font-size: 0.72rem; font-weight: 500;
+      color: var(--henna-dark); background: #fff; -webkit-tap-highlight-color: transparent;
+    }
+    .mobilebar__btn b { font-size: 1.25rem; line-height: 1; font-weight: 400; }
+    .mobilebar__btn:active { background: var(--cream-2); }
+    .mobilebar__btn--wa { color: #1ba84f; }
+    .mobilebar__btn--book { background: linear-gradient(135deg, var(--henna), var(--henna-dark)); color: #fff; }
+
     /* ===== Responsive ===== */
 
     /* Tablet & below */
@@ -241,14 +276,14 @@
     /* Large phones */
     @media (max-width: 640px) {
       .container { width: 92%; }
-      .section { padding: 3.5rem 0; }
-      .section__title { margin-bottom: 2rem; }
+      .section { padding: 3.25rem 0; }
+      .section__title { margin-bottom: 1.8rem; }
 
-      .hero { padding: 4rem 0 3.5rem; }
+      .hero { padding: 3.5rem 0 3rem; }
       .hero__decor { font-size: 6rem; }
-      .hero__sub { font-size: 1rem; }
-      .hero__actions { flex-direction: column; align-items: stretch; }
-      .hero__actions .btn { width: 100%; text-align: center; }
+      .hero__sub { font-size: 1rem; max-width: 38ch; }
+      .hero__actions { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+      .hero__actions .btn { width: 100%; text-align: center; padding: 0.95rem 1.7rem; }
 
       .hero__stats {
         gap: 0; margin-top: 2.5rem;
@@ -260,11 +295,38 @@
       .hero__stats strong { font-size: 1.6rem; }
       .hero__stats span { font-size: 0.72rem; }
 
-      .card { padding: 1.6rem 1.4rem; }
+      /* one service card per row reads better on small screens */
+      .cards { grid-template-columns: 1fr; gap: 1rem; }
+      .card { padding: 1.5rem 1.4rem; display: flex; align-items: flex-start; gap: 1rem; text-align: left; }
+      .card__icon { margin-bottom: 0; font-size: 1.9rem; flex-shrink: 0; }
+      .card h3 { font-size: 1.35rem; }
+
+      /* tidy 2-up gallery with even gaps */
+      .gallery { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+      .gallery__item { border-radius: 14px; }
+      .gallery__item span { font-size: 0.78rem; padding: 0.25rem 0.7rem; }
+      .gallery__cta { margin-top: 1.8rem; }
+
+      .quote { padding: 1.4rem 1.5rem; }
       .about__circle { width: 200px; height: 200px; font-size: 2.4rem; }
       .contact__form { padding: 1.5rem; }
 
+      /* 16px inputs stop iOS from auto-zooming on focus */
+      .field input, .field select, .field textarea { font-size: 16px; padding: 0.85rem 0.95rem; }
+      .field label { font-size: 0.9rem; }
+
       .footer__inner { flex-direction: column; text-align: center; }
+      /* leave room for the sticky action bar */
+      .footer { padding-bottom: 6rem; }
+      body { padding-bottom: 0; }
+
+      /* show the sticky action bar */
+      .mobilebar {
+        display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+        background: #fff; border-top: 1px solid var(--cream-2);
+        box-shadow: 0 -6px 24px -12px rgba(78,45,22,0.35);
+        padding-bottom: env(safe-area-inset-bottom, 0);
+      }
     }
 
     /* Small phones */
@@ -359,12 +421,13 @@
       <p class="section__eyebrow">Our Work</p>
       <h2 class="section__title">Design Gallery</h2>
       <div class="gallery">
-        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#7b4b2a;--c2:#c98a5e;"><img src="images/1.jpg" alt="Bridal mehandi design" loading="lazy" onerror="this.remove()" /><span>Bridal</span></a>
-        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#8a5a2b;--c2:#d8a06a;"><img src="images/2.jpg" alt="Arabic mehandi design" loading="lazy" onerror="this.remove()" /><span>Arabic</span></a>
-        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#6e3f22;--c2:#b8794a;"><img src="images/3.jpg" alt="Floral mehandi design" loading="lazy" onerror="this.remove()" /><span>Floral</span></a>
-        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#94632f;--c2:#e0ad74;"><img src="images/4.jpg" alt="Minimal mehandi design" loading="lazy" onerror="this.remove()" /><span>Minimal</span></a>
-        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#5e3618;--c2:#a86d3e;"><img src="images/5.jpg" alt="Mehandi design on feet" loading="lazy" onerror="this.remove()" /><span>Feet</span></a>
-        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#7b4b2a;--c2:#cf9560;"><img src="images/6.jpg" alt="Festive mehandi design" loading="lazy" onerror="this.remove()" /><span>Festive</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#7b4b2a;--c2:#c98a5e;"><img src="images/1.jpeg" alt="Bridal full-hand mehandi with Ganesha motif" loading="lazy" onerror="this.remove()" /><span>Bridal</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#5e3618;--c2:#a86d3e;"><img src="images/5.jpeg" alt="Bridal full-arm mehandi with bride motif" loading="lazy" onerror="this.remove()" /><span>Bridal Arm</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#6e3f22;--c2:#b8794a;"><img src="images/3.jpeg" alt="Dulhan both-hands bridal mehandi" loading="lazy" onerror="this.remove()" /><span>Dulhan</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#94632f;--c2:#e0ad74;"><img src="images/4.jpeg" alt="Peacock mehandi design on hand" loading="lazy" onerror="this.remove()" /><span>Peacock</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#8a5a2b;--c2:#d8a06a;"><img src="images/2.jpeg" alt="Arabic floral mehandi design" loading="lazy" onerror="this.remove()" /><span>Arabic</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#7b4b2a;--c2:#cf9560;"><img src="images/6.jpeg" alt="Festive ornate back-hand mehandi" loading="lazy" onerror="this.remove()" /><span>Festive</span></a>
+        <a class="gallery__item" href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="--c1:#94632f;--c2:#e0ad74;"><img src="images/7.jpeg" alt="Minimal peacock mehandi design" loading="lazy" onerror="this.remove()" /><span>Minimal</span></a>
       </div>
       <div class="gallery__cta">
         <a href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" class="btn btn--primary ig-link">
@@ -431,12 +494,7 @@
           <li><span>📷</span> <a href="https://www.instagram.com/shringar_mehendi/" target="_blank" rel="noopener" style="color:var(--henna);font-weight:500;">@shringar_mehendi</a></li>
         </ul>
       </div>
-      <form class="contact__form" id="bookingForm" action="https://formsubmit.co/sanjkaremani01@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="New Mehandi Booking Request" />
-        <input type="hidden" name="_cc" value="anandsullad777@gmail.com" />
-        <input type="hidden" name="_next" id="redirectUrl" value="" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_template" value="table" />
+      <form class="contact__form" id="bookingForm">
         <div class="field">
           <label for="name">Name</label>
           <input id="name" name="name" type="text" placeholder="Your name" required />
@@ -463,6 +521,7 @@
           <textarea id="message" name="message" rows="3" placeholder="Date, location, design ideas..."></textarea>
         </div>
         <button type="submit" class="btn btn--primary btn--block">Request Booking</button>
+        <p class="form__note" id="formNote" hidden></p>
       </form>
     </div>
   </section>
@@ -479,6 +538,15 @@
     </div>
   </footer>
 
+  <!-- MOBILE STICKY ACTION BAR -->
+  <nav class="mobilebar" aria-label="Quick actions">
+    <a href="tel:+918618357437" class="mobilebar__btn"><b>📞</b><span>Call</span></a>
+    <a href="https://wa.me/918618357437" target="_blank" rel="noopener" class="mobilebar__btn mobilebar__btn--wa"><b>💬</b><span>WhatsApp</span></a>
+    <a href="#contact" class="mobilebar__btn mobilebar__btn--book"><b>✦</b><span>Book Now</span></a>
+  </nav>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     // ===== Shringara Mehandi — interactions =====
 
@@ -506,21 +574,123 @@
       if (window.innerWidth > 900) setMenu(false);
     });
 
-    // Booking form (FormSubmit)
-    const form = document.getElementById('bookingForm');
-
-    // Redirect to the thank-you page after a successful submission
-    const redirectField = document.getElementById('redirectUrl');
-    if (redirectField) {
-      redirectField.value = window.location.href.replace(/index\.html.*$/, '') + 'thank-you.html';
+    // ===== Scroll reveal =====
+    const revealEls = document.querySelectorAll(
+      '.card, .gallery__item, .quote, .section__eyebrow, .section__title, .about__art, .contact__form'
+    );
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            // subtle stagger for grouped items
+            entry.target.style.transitionDelay = Math.min(i * 60, 240) + 'ms';
+            entry.target.classList.add('show');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach((el) => io.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add('show'));
     }
 
-    // Disable the button while sending
-    form.addEventListener('submit', () => {
+    // ===== Active nav link on scroll (scrollspy) =====
+    const sections = ['services', 'gallery', 'about', 'testimonials', 'contact']
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+    const navAnchors = navLinks.querySelectorAll('a');
+
+    function setActiveNav() {
+      const y = window.scrollY + 110;
+      let currentId = '';
+      for (const sec of sections) {
+        if (sec.offsetTop <= y) currentId = sec.id;
+      }
+      navAnchors.forEach((a) => {
+        const href = a.getAttribute('href') || '';
+        a.classList.toggle('active', href === '#' + currentId);
+      });
+    }
+    window.addEventListener('scroll', setActiveNav, { passive: true });
+    setActiveNav();
+
+    // ====================================================================
+    // BOOKING FORM — EmailJS
+    // --------------------------------------------------------------------
+    // Fill in the 5 values below from your EmailJS dashboard (see steps in
+    // the README / chat). Until they are filled, the form shows a friendly
+    // message instead of failing silently.
+    // ====================================================================
+    const EMAILJS_CONFIG = {
+      publicKey:  'ZlZKWVTs0eyeD0Dd_',   // ✓ Account → General → Public Key
+      serviceId:  'service_dtpxc4g',     // ✓ from your EmailJS Email Services
+      templateId: 'template_32p3sze',    // ✓ Email Templates → your template
+      toEmail:    'sanjkaremani01@gmail.com',   // client receives bookings here
+      ccEmail:    'anandsullad777@gmail.com'    // your copy (optional, leave '' to skip)
+    };
+
+    const form = document.getElementById('bookingForm');
+    const note = document.getElementById('formNote');
+
+    function showNote(message, isError) {
+      note.hidden = false;
+      note.textContent = message;
+      note.style.color = isError ? '#b3261e' : 'var(--henna)';
+    }
+
+    const isPlaceholder = (v) => !v || /^YOUR_/.test(v);
+    const emailReady =
+      window.emailjs &&
+      !isPlaceholder(EMAILJS_CONFIG.publicKey) &&
+      !isPlaceholder(EMAILJS_CONFIG.serviceId) &&
+      !isPlaceholder(EMAILJS_CONFIG.templateId);
+
+    if (emailReady) {
+      emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
       const btn = form.querySelector('button[type="submit"]');
-      if (btn) {
-        btn.disabled = true;
-        btn.textContent = 'Sending...';
+      const name = form.name.value.trim();
+      const phone = form.phone.value.trim();
+
+      if (!name || !phone) {
+        showNote('Please enter your name and phone number.', true);
+        return;
+      }
+
+      if (!emailReady) {
+        showNote('Booking is not connected yet. Please call or WhatsApp us at +91 86183 57437.', true);
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      // Template variables — use these names as {{placeholders}} in your EmailJS template
+      const params = {
+        to_email:   EMAILJS_CONFIG.toEmail,
+        cc_email:   EMAILJS_CONFIG.ccEmail,
+        from_name:  name,
+        reply_to:   form.email.value.trim() || EMAILJS_CONFIG.toEmail,
+        phone:      phone,
+        email:      form.email.value.trim() || '—',
+        occasion:   form.occasion.value,
+        message:    form.message.value.trim() || '—',
+        time:       new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
+        page_url:   window.location.href
+      };
+
+      try {
+        await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, params);
+        // Success → go to the thank-you page
+        window.location.href = 'thank-you.html';
+      } catch (err) {
+        console.error('[EmailJS] Send failed:', err);
+        showNote('Sorry, something went wrong. Please call or WhatsApp us at +91 86183 57437.', true);
+        btn.disabled = false;
+        btn.textContent = 'Request Booking';
       }
     });
   </script>
